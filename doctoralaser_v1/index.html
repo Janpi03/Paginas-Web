@@ -4,41 +4,119 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odontología Láser en Bogotá | DoctorLáser — Dra. Ana Vinasco</title>
-  <meta name="description" content="Odontología con láser diodo en Bogotá. Tratamientos más precisos, menos dolor y recuperación más rápida. Dra. Ana Vinasco, 5 años de experiencia.">
-  <meta property="og:title" content="Odontología Láser en Bogotá | DoctorLáser">
-  <meta property="og:description" content="Tratamientos dentales con láser diodo: blanqueamiento, gingivoplastia, fotobiomodulación y más.">
+  <meta name="description" content="Odontología con láser diodo en Bogotá. Tratamientos más precisos, menos dolor y recuperación más rápida. Dra. Ana Vinasco, más de 5 años de experiencia. Cra. 7 Bis #124-56.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0B3528">
+  <link rel="canonical" href="https://doctoralaser.com/">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://doctoralaser.com/">
+  <meta property="og:title" content="Odontología Láser en Bogotá | DoctorLáser — Dra. Ana Vinasco">
+  <meta property="og:description" content="Tratamientos dentales con láser diodo: blanqueamiento, gingivoplastia, fotobiomodulación y más. Menos dolor, recuperación rápida.">
+  <meta property="og:image" content="https://doctoralaser.com/images/Consultorio.webp">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="DoctorLáser">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Odontología Láser en Bogotá | DoctorLáser">
+  <meta name="twitter:description" content="Blanqueamiento, gingivoplastia, fotobiomodulación y más con láser diodo en Bogotá.">
+  <meta name="twitter:image" content="https://doctoralaser.com/images/Consultorio.webp">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Schema.org LocalBusiness / Dentist -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "DoctorLáser — Dra. Ana Vinasco",
+    "description": "Consulta de odontología con láser diodo en Bogotá. Blanqueamiento, gingivoplastia, fotobiomodulación, desensibilización y más.",
+    "url": "https://doctoralaser.com",
+    "telephone": "+573015666729",
+    "email": "info@doctoralaser.com",
+    "image": [
+      "https://doctoralaser.com/images/Consultorio.webp",
+      "https://doctoralaser.com/images/doctora.webp",
+      "https://doctoralaser.com/images/edificio.webp"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cra. 7 Bis #124-56",
+      "addressLocality": "Bogotá",
+      "addressRegion": "Cundinamarca",
+      "postalCode": "110221",
+      "addressCountry": "CO"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 4.7110,
+      "longitude": -74.0721
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday",    "opens": "08:00", "closes": "12:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday",   "opens": "08:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "14:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday",  "opens": "08:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday",    "opens": "08:00", "closes": "19:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday",  "opens": "08:00", "closes": "19:00" }
+    ],
+    "priceRange": "$$",
+    "currenciesAccepted": "COP",
+    "paymentAccepted": "Cash, Credit Card",
+    "areaServed": {
+      "@type": "City",
+      "name": "Bogotá"
+    },
+    "hasMap": "https://maps.google.com/?q=Cra.+7+Bis+%23124-56,+Bogot%C3%A1,+Colombia",
+    "sameAs": [
+      "https://luminadent.co",
+      "https://draanavinasco.com"
+    ],
+    "medicalSpecialty": "Dentist"
+  }
+  </script>
 </head>
 <body>
 
   <nav class="nav" id="main-nav" aria-label="Navegación principal"></nav>
   <div id="wa-float" class="wa-float" role="complementary" aria-label="Contacto WhatsApp"></div>
 
-  <main>
+  <main id="main-content">
 
     <!-- HERO -->
-    <section class="hero hero--full">
-      <div class="hero__bg" style="background-image:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80')"></div>
-      <div class="hero__overlay"></div>
+    <section class="hero hero--full" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <img src="images/Consultorio.webp"
+             alt=""
+             width="1400" height="900"
+             loading="eager"
+             decoding="async"
+             fetchpriority="high"
+             style="width:100%;height:100%;object-fit:cover;opacity:.25;filter:saturate(.3)">
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
       <div class="hero__content">
         <div class="hero__tag fade-up">
-          <i class="ti ti-sparkles"></i>
+          <i class="ti ti-sparkles" aria-hidden="true"></i>
           Bogotá, Colombia
         </div>
-        <h1 class="hero__title fade-up delay-1">
+        <h1 class="hero__title fade-up delay-1" id="hero-title">
           Odontología láser:<br><em>más precisa, menos dolor,</em><br>recuperación más rápida
         </h1>
         <p class="hero__sub fade-up delay-2">
-          El láser cambió la forma de hacer odontología. Dra. Ana Vinasco lleva más de 5 años aplicando láser diodo en Bogotá con resultados clínicos respaldados por evidencia.
+          El láser cambió la forma de hacer odontología. La Dra. Ana Vinasco lleva más de 5 años aplicando láser diodo en Bogotá con resultados clínicos respaldados por evidencia.
         </p>
         <div class="hero__actions fade-up delay-3">
           <a href="agenda.html" class="btn btn--primary btn--lg">
-            <i class="ti ti-calendar-plus"></i>
+            <i class="ti ti-calendar-plus" aria-hidden="true"></i>
             Agendar valoración
           </a>
           <a href="tratamientos.html" class="btn btn--outline btn--lg">
@@ -46,17 +124,17 @@
           </a>
         </div>
       </div>
-      <div class="hero__scroll">
+      <div class="hero__scroll" aria-hidden="true">
         <div class="hero__scroll-line"></div>
       </div>
     </section>
 
     <!-- STATS STRIP -->
-    <section class="section--sm" style="background:var(--c-p900)">
+    <section class="section--sm" style="background:var(--c-p900)" aria-label="Estadísticas">
       <div class="container">
         <div class="stats-strip fade-up">
           <div class="stat-item">
-            <div class="stat-num"><span data-count="5">0</span><span style="color:var(--c-p400)">+</span></div>
+            <div class="stat-num"><span data-count="5">0</span><span style="color:var(--c-p400)" aria-hidden="true">+</span></div>
             <div class="stat-label">años con láser diodo</div>
           </div>
           <div class="stat-item">
@@ -64,7 +142,7 @@
             <div class="stat-label">tratamientos disponibles</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num"><span style="color:var(--c-p400)">↓</span>70<span style="color:var(--c-p400);font-size:1.8rem">%</span></div>
+            <div class="stat-num"><span style="color:var(--c-p400)" aria-hidden="true">↓</span>70<span style="color:var(--c-p400);font-size:1.8rem" aria-hidden="true">%</span></div>
             <div class="stat-label">menos dolor post-op</div>
           </div>
           <div class="stat-item">
@@ -76,13 +154,13 @@
     </section>
 
     <!-- QUÉ ES -->
-    <section>
+    <section aria-labelledby="que-es-title">
       <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
           <div class="fade-up">
             <div class="eyebrow section-header__eyebrow">La tecnología</div>
             <div class="section-divider"></div>
-            <h2 class="display-md" style="color:var(--c-n800);margin-bottom:1.25rem">
+            <h2 class="display-md" style="color:var(--c-n800);margin-bottom:1.25rem" id="que-es-title">
               ¿Qué es exactamente<br><em style="font-style:italic;color:var(--c-p600)">el láser en odontología?</em>
             </h2>
             <p class="lead mb-3">
@@ -92,20 +170,22 @@
               El <strong style="color:var(--c-n700)">láser diodo</strong> opera en el espectro infrarrojo cercano y tiene afinidad especial por tejidos blandos (encías, mucosa) y la melanina. Eso lo hace ideal para procedimientos periodontales, estéticos y de manejo del dolor.
             </p>
             <a href="tratamientos.html" class="btn btn--teal">
-              Ver todos los tratamientos <i class="ti ti-arrow-right"></i>
+              Ver todos los tratamientos <i class="ti ti-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
           <div class="fade-up delay-2">
             <div style="position:relative;border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/5">
-              <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=700&q=80"
-                   alt="Paciente en consulta de odontología láser"
-                   style="width:100%;height:100%;object-fit:cover"
-                   loading="lazy">
+              <img src="images/doctora.webp"
+                   alt="Dra. Ana Vinasco en consulta de odontología láser en Bogotá"
+                   width="600" height="750"
+                   loading="lazy"
+                   decoding="async"
+                   style="width:100%;height:100%;object-fit:cover">
               <div style="position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(7,21,16,.82);backdrop-filter:blur(8px);border-radius:var(--radius-md);padding:1rem 1.25rem;border:1px solid rgba(29,158,117,.2)">
                 <p style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:3px">Procedimiento</p>
                 <p style="font-size:15px;font-weight:500;color:var(--c-white)">Láser diodo · Tejidos blandos</p>
                 <p style="font-size:12px;color:var(--c-p300);margin-top:4px">
-                  <i class="ti ti-check" style="vertical-align:-2px"></i> Sin sutura · Sin sangrado excesivo
+                  <i class="ti ti-check" style="vertical-align:-2px" aria-hidden="true"></i> Sin sutura · Sin sangrado excesivo
                 </p>
               </div>
             </div>
@@ -115,58 +195,59 @@
     </section>
 
     <!-- COMPARACIÓN -->
-    <section class="bg-light">
+    <section class="bg-light" aria-labelledby="comparacion-title">
       <div class="container">
         <div class="section-header section-header--center fade-up">
           <div class="eyebrow section-header__eyebrow">Comparativa</div>
           <div class="section-divider section-divider--center"></div>
-          <h2 class="section-header__title">Láser vs. odontología<br><em>convencional</em></h2>
+          <h2 class="section-header__title" id="comparacion-title">Láser vs. odontología<br><em>convencional</em></h2>
           <p class="section-header__text">No es una moda. Es una diferencia clínica real en cada procedimiento.</p>
         </div>
         <div class="fade-up" style="overflow-x:auto">
           <table class="comparison-table">
+            <caption class="sr-only">Comparación entre odontología convencional y odontología con láser diodo</caption>
             <thead>
               <tr>
-                <th>Criterio</th>
-                <th>Odontología convencional</th>
-                <th><i class="ti ti-bolt" style="vertical-align:-3px;margin-right:5px"></i>Con láser diodo</th>
+                <th scope="col">Criterio</th>
+                <th scope="col">Odontología convencional</th>
+                <th scope="col"><i class="ti ti-bolt" style="vertical-align:-3px;margin-right:5px" aria-hidden="true"></i>Con láser diodo</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Corte de tejidos</td>
                 <td>Bisturí + puntos de sutura</td>
-                <td><i class="ti ti-check icon-check"></i> Sin sutura en muchos casos</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Sin sutura en muchos casos</td>
               </tr>
               <tr>
                 <td>Dolor post-operatorio</td>
                 <td>Moderado a alto</td>
-                <td><i class="ti ti-check icon-check"></i> Reducido significativamente</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Reducido significativamente</td>
               </tr>
               <tr>
                 <td>Riesgo de infección</td>
                 <td>Mayor (herida abierta)</td>
-                <td><i class="ti ti-check icon-check"></i> Menor — el láser desinfecta al actuar</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Menor — el láser desinfecta al actuar</td>
               </tr>
               <tr>
                 <td>Tiempo de recuperación</td>
                 <td>Días a semanas</td>
-                <td><i class="ti ti-check icon-check"></i> Horas a pocos días</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Horas a pocos días</td>
               </tr>
               <tr>
                 <td>Sangrado</td>
                 <td>Presente</td>
-                <td><i class="ti ti-check icon-check"></i> Mínimo o nulo</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Mínimo o nulo</td>
               </tr>
               <tr>
                 <td>Anestesia requerida</td>
                 <td>Siempre</td>
-                <td><i class="ti ti-check icon-check"></i> Se reduce o elimina en muchos casos</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Se reduce o elimina en muchos casos</td>
               </tr>
               <tr>
                 <td>Precisión</td>
                 <td>Estándar</td>
-                <td><i class="ti ti-check icon-check"></i> Milimétrica — protege tejido sano</td>
+                <td><i class="ti ti-check icon-check" aria-hidden="true"></i> Milimétrica — protege tejido sano</td>
               </tr>
             </tbody>
           </table>
@@ -178,21 +259,23 @@
     </section>
 
     <!-- DOES IT HURT -->
-    <section>
+    <section aria-labelledby="dolor-title">
       <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
           <div class="fade-up delay-1">
             <div style="position:relative;border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:1/1">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffbb172d4d6?w=700&q=80"
-                   alt="Sonrisa natural resultado tratamiento láser"
-                   style="width:100%;height:100%;object-fit:cover"
-                   loading="lazy">
+              <img src="images/Consultorio.webp"
+                   alt="Interior del consultorio DoctorLáser en Bogotá"
+                   width="600" height="600"
+                   loading="lazy"
+                   decoding="async"
+                   style="width:100%;height:100%;object-fit:cover">
             </div>
           </div>
           <div class="fade-up">
             <div class="eyebrow section-header__eyebrow">La pregunta más común</div>
             <div class="section-divider"></div>
-            <h2 class="display-md" style="color:var(--c-n800);margin-bottom:1.25rem">
+            <h2 class="display-md" style="color:var(--c-n800);margin-bottom:1.25rem" id="dolor-title">
               ¿El láser <em style="font-style:italic;color:var(--c-p600)">duele?</em>
             </h2>
             <p style="font-size:15px;color:var(--c-n500);line-height:1.75;margin-bottom:1.25rem">
@@ -206,19 +289,19 @@
             </p>
             <div style="display:flex;flex-direction:column;gap:.75rem">
               <div style="display:flex;align-items:center;gap:.75rem;font-size:14px;color:var(--c-n700)">
-                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0" aria-hidden="true">
                   <i class="ti ti-check" style="color:var(--c-p500)"></i>
                 </div>
                 Procedimientos sin anestesia en tejidos blandos
               </div>
               <div style="display:flex;align-items:center;gap:.75rem;font-size:14px;color:var(--c-n700)">
-                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0" aria-hidden="true">
                   <i class="ti ti-check" style="color:var(--c-p500)"></i>
                 </div>
                 Post-operatorio notablemente más cómodo
               </div>
               <div style="display:flex;align-items:center;gap:.75rem;font-size:14px;color:var(--c-n700)">
-                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <div style="width:32px;height:32px;background:var(--c-p50);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0" aria-hidden="true">
                   <i class="ti ti-check" style="color:var(--c-p500)"></i>
                 </div>
                 Ideal para pacientes con miedo al dentista
@@ -230,43 +313,89 @@
     </section>
 
     <!-- PARA QUIÉN -->
-    <section class="bg-teal-light">
+    <section class="bg-teal-light" aria-labelledby="para-quien-title">
       <div class="container">
         <div class="section-header section-header--center fade-up">
           <div class="eyebrow section-header__eyebrow">Indicaciones</div>
           <div class="section-divider section-divider--center"></div>
-          <h2 class="section-header__title">¿Para quién es<br><em>la odontología láser?</em></h2>
+          <h2 class="section-header__title" id="para-quien-title">¿Para quién es<br><em>la odontología láser?</em></h2>
         </div>
         <div class="grid-3 fade-up" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
           <div class="benefit-card">
-            <i class="ti ti-heart" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-heart" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Miedo al dentista</div>
             <div class="benefit-card__text">Pacientes con odontofobia que evitan el dentista por el dolor o las agujas. El láser cambia completamente la experiencia.</div>
           </div>
           <div class="benefit-card">
-            <i class="ti ti-tooth" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-tooth" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Problemas de encías</div>
             <div class="benefit-card__text">Periodontitis, encías inflamadas o sensibles. El láser desinfecta y regenera sin el trauma del bisturí convencional.</div>
           </div>
           <div class="benefit-card">
-            <i class="ti ti-mood-smile" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-mood-smile" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Estética dental</div>
             <div class="benefit-card__text">Blanqueamiento, rediseño de sonrisa, corrección de encías. Resultados precisos en una o pocas sesiones.</div>
           </div>
           <div class="benefit-card">
-            <i class="ti ti-activity" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-activity" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Sensibilidad dental</div>
             <div class="benefit-card__text">Dolor ante frío, calor o dulces. La desensibilización con láser va a la causa, no solo al síntoma.</div>
           </div>
           <div class="benefit-card">
-            <i class="ti ti-clock" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-clock" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Recuperación rápida</div>
-            <div class="benefit-card__text">Quienes necesitan cirugía menor y no pueden permitirse días de recuperación. Con láser: 24–48h en la mayoría de casos.</div>
+            <div class="benefit-card__text">Quienes necesitan cirugía menor y no pueden permitirse días de recuperación. Con láser: 24–48 h en la mayoría de casos.</div>
           </div>
           <div class="benefit-card">
-            <i class="ti ti-brain" style="font-size:28px;color:var(--c-p500)"></i>
+            <i class="ti ti-brain" style="font-size:28px;color:var(--c-p500)" aria-hidden="true"></i>
             <div class="benefit-card__title">Bruxismo y dolor muscular</div>
             <div class="benefit-card__text">Tensión crónica en mandíbula, cefaleas y limitación de apertura. La terapia láser complementa el tratamiento convencional.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSULTORIO -->
+    <section aria-labelledby="consultorio-title">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center">
+          <div class="fade-up">
+            <div class="eyebrow section-header__eyebrow">Dónde estamos</div>
+            <div class="section-divider"></div>
+            <h2 class="display-md" style="color:var(--c-n800);margin-bottom:1.25rem" id="consultorio-title">
+              Consultorio en<br><em style="color:var(--c-p600)">Bogotá</em>
+            </h2>
+            <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem">
+              <div style="display:flex;align-items:flex-start;gap:.75rem;font-size:15px;color:var(--c-n700)">
+                <i class="ti ti-map-pin" style="color:var(--c-p500);font-size:20px;flex-shrink:0;margin-top:2px" aria-hidden="true"></i>
+                <div>
+                  <strong>Cra. 7 Bis #124-56</strong><br>
+                  <span style="color:var(--c-n500);font-size:14px">Bogotá, Colombia</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:.75rem;font-size:15px;color:var(--c-n700)">
+                <i class="ti ti-phone" style="color:var(--c-p500);font-size:20px;flex-shrink:0" aria-hidden="true"></i>
+                <a href="tel:+573015666729" style="color:var(--c-n700)">+57 301 5666729</a>
+              </div>
+              <div style="display:flex;align-items:center;gap:.75rem;font-size:15px;color:var(--c-n700)">
+                <i class="ti ti-clock" style="color:var(--c-p500);font-size:20px;flex-shrink:0" aria-hidden="true"></i>
+                <span>Lun–Vie · Sábados · Ver horarios completos</span>
+              </div>
+            </div>
+            <a href="agenda.html" class="btn btn--teal">
+              <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+              Agendar cita
+            </a>
+          </div>
+          <div class="fade-up delay-2">
+            <div style="border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/3">
+              <img src="images/edificio.webp"
+                   alt="Edificio donde se encuentra la consulta DoctorLáser, Cra. 7 Bis #124-56, Bogotá"
+                   width="600" height="450"
+                   loading="lazy"
+                   decoding="async"
+                   style="width:100%;height:100%;object-fit:cover">
+            </div>
           </div>
         </div>
       </div>
@@ -282,8 +411,8 @@
             <p class="cta-section__sub">En la consulta de valoración lo determinamos. La Dra. Ana Vinasco evalúa tu caso y te explica opciones reales, sin presión.</p>
           </div>
           <div class="cta-section__actions">
-            <a href="agenda.html" class="btn btn--wa btn--lg">
-              <i class="ti ti-brand-whatsapp"></i>
+            <a href="https://wa.me/573015666729?text=Hola%2C%20quiero%20agendar%20una%20consulta%20de%20valoraci%C3%B3n%20en%20DoctorL%C3%A1ser%20%F0%9F%98%8A" target="_blank" rel="noopener noreferrer" class="btn btn--wa btn--lg">
+              <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
               Agendar por WhatsApp
             </a>
             <a href="tratamientos.html" class="btn btn--outline">
