@@ -1,227 +1,365 @@
-/* ============================================================
-   DOCTORALASER.COM — Shared Components
-   ============================================================ */
+/* ─────────────────────────────────────────────────────
+   DoctorLáser · components.js
+   Centralises: config, nav, footer, WhatsApp float,
+   lead-capture banner, animations, font injection,
+   Schema.org JSON-LD, service-worker registration.
+   ───────────────────────────────────────────────────── */
 
-(function () {
-  'use strict';
+// ── SITE CONFIG ──────────────────────────────────────
+var CFG = {
+  name:         'Doctor Láser',
+  doctor:       'Dra. Ana Vinasco',
+  tagline:      'Odontología láser en Bogotá',
+  url:          'https://www.doctoralaser.com',   // ← update with final domain
+  phone:        '573015666729',
+  phoneDisplay: '+57 301 5666729',
+  email:        'info@doctoralaser.com',
+  address: {
+    street:       'Cra. 7 Bis #124-56',
+    neighborhood: 'Chapinero',
+    city:         'Bogotá',
+    country:      'Colombia',
+    postalCode:   '110221',
+    lat:           4.6639,
+    lng:          -74.0554
+  },
+  hours: {
+    display: 'Lun–Vie 8:00 a.m. – 7:00 p.m. · Sáb 8:00 a.m. – 7:00 p.m.',
+    schema: [
+      { dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '08:00', closes: '19:00' },
+      { dayOfWeek: ['Saturday'], opens: '08:00', closes: '19:00' }
+    ]
+  },
+  social: {
+    instagram: 'https://www.instagram.com/doctoralaser.co',
+    facebook:  'https://www.facebook.com/doctoralaser.co'
+  },
+  nav: [
+    { label: 'Inicio',       href: 'index.html' },
+    { label: 'Beneficios',   href: 'beneficios.html' },
+    { label: 'Tratamientos', href: 'tratamientos.html' },
+    { label: 'Evidencia',    href: 'evidencia.html' },
+    { label: 'Casos',        href: 'casos.html' },
+    { label: 'Agenda',       href: 'agenda.html' }
+  ]
+};
 
-  var WA_NUMBER  = '573015666729';
-  var WA_BASE    = 'https://wa.me/' + WA_NUMBER;
-  var SITE_EMAIL = 'info@doctoralaser.com';
-  var SITE_PHONE = '+57 301 5666729';
-  var SITE_ADDR  = 'Cra. 7 Bis #124-56, Bogotá, Colombia';
+// Convenience alias kept for any inline scripts that reference WA_NUMBER
+var WA_NUMBER = CFG.phone;
 
-  var HOURS = [
-    { day: 'Lunes',    time: '8:00 a.m. – 12:00 p.m.' },
-    { day: 'Martes',   time: '8:00 a.m. – 7:00 p.m.' },
-    { day: 'Miércoles',time: '2:00 p.m. – 7:00 p.m.' },
-    { day: 'Jueves',   time: '8:00 a.m. – 7:00 p.m.' },
-    { day: 'Viernes',  time: '8:00 a.m. – 7:00 p.m.' },
-    { day: 'Sábado',   time: '8:00 a.m. – 7:00 p.m.' },
-    { day: 'Domingo',  time: 'Cerrado', closed: true },
-  ];
+// ── FONT INJECTION ───────────────────────────────────
+// Injects Google Fonts if not already present (handles
+// pages that omit the <link> tag).
+function injectFonts() {
+  if (document.querySelector('link[href*="fonts.googleapis.com"]')) return;
+  var preconnect1 = document.createElement('link');
+  preconnect1.rel = 'preconnect';
+  preconnect1.href = 'https://fonts.googleapis.com';
 
-  var navLinks = [
-    { href: 'index.html',        label: '¿Qué es?' },
-    { href: 'beneficios.html',   label: 'Beneficios' },
-    { href: 'tratamientos.html', label: 'Tratamientos' },
-    { href: 'evidencia.html',    label: 'Evidencia' },
-    { href: 'casos.html',        label: 'Casos reales' },
-  ];
+  var preconnect2 = document.createElement('link');
+  preconnect2.rel = 'preconnect';
+  preconnect2.href = 'https://fonts.gstatic.com';
+  preconnect2.crossOrigin = 'anonymous';
 
-  document.addEventListener('DOMContentLoaded', function () {
-    buildNav();
-    buildWaFloat();
-    buildFooter();
-    initPopup();
+  var fonts = document.createElement('link');
+  fonts.rel  = 'stylesheet';
+  fonts.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap';
+
+  var head = document.head;
+  head.insertBefore(preconnect1, head.firstChild);
+  head.insertBefore(preconnect2, head.children[1] || null);
+  head.appendChild(fonts);
+}
+
+// ── SCHEMA.ORG JSON-LD ───────────────────────────────
+// Injected once per page. Google supports JS-rendered JSON-LD.
+function injectSchema() {
+  if (document.querySelector('script[data-schema="doctoralaser"]')) return;
+
+  var schema = {
+    '@context': 'https://schema.org',
+    '@type': ['LocalBusiness', 'MedicalBusiness'],
+    'name': CFG.name,
+    'description': 'Odontología con láser diodo en Bogotá. Blanqueamiento, gingivoplastia, frenilectomía y más. Sin suturas, recuperación en 24-48h.',
+    'url': CFG.url,
+    'telephone': CFG.phoneDisplay,
+    'email': CFG.email,
+    'image': CFG.url + '/og-image.webp',
+    'priceRange': '$$',
+    'address': {
+      '@type': 'PostalAddress',
+      'streetAddress': CFG.address.street,
+      'addressLocality': CFG.address.city,
+      'addressRegion': 'Bogotá D.C.',
+      'postalCode': CFG.address.postalCode,
+      'addressCountry': 'CO'
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude':  CFG.address.lat,
+      'longitude': CFG.address.lng
+    },
+    'openingHoursSpecification': CFG.hours.schema.map(function(h) {
+      return {
+        '@type': 'OpeningHoursSpecification',
+        'dayOfWeek': h.dayOfWeek,
+        'opens': h.opens,
+        'closes': h.closes
+      };
+    }),
+    'sameAs': [
+      CFG.social.instagram,
+      CFG.social.facebook
+    ],
+    'hasMap': 'https://maps.google.com/?q=' + CFG.address.lat + ',' + CFG.address.lng
+  };
+
+  var tag = document.createElement('script');
+  tag.type = 'application/ld+json';
+  tag.setAttribute('data-schema', 'doctoralaser');
+  tag.textContent = JSON.stringify(schema);
+  document.head.appendChild(tag);
+}
+
+// ── NAV ──────────────────────────────────────────────
+function buildNav() {
+  var navEl = document.getElementById('main-nav');
+  if (!navEl) return;
+
+  var currentPage = location.pathname.split('/').pop() || 'index.html';
+
+  var linksHTML = CFG.nav.map(function(l) {
+    var isActive = (currentPage === l.href || (currentPage === '' && l.href === 'index.html'));
+    return '<li><a href="' + l.href + '"' + (isActive ? ' class="active" aria-current="page"' : '') + '>' + l.label + '</a></li>';
+  }).join('');
+
+  navEl.setAttribute('role', 'navigation');
+  navEl.setAttribute('aria-label', 'Navegación principal');
+
+  navEl.innerHTML =
+    '<div class="nav-inner">' +
+      '<a href="index.html" class="nav-logo" aria-label="' + CFG.name + ' – inicio">' +
+        CFG.name + ' <em>' + CFG.doctor + ' · ' + CFG.address.city + '</em>' +
+      '</a>' +
+      '<ul class="nav-links" id="mobile-menu" role="list">' +
+        linksHTML +
+        '<li class="nav-cta-mobile"><a href="agenda.html" class="btn btn--primary">Agendar cita</a></li>' +
+      '</ul>' +
+      '<a href="agenda.html" class="nav-cta desktop-only"><span class="btn btn--primary">Agendar cita</span></a>' +
+      '<button class="nav-mobile-btn" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">' +
+        '<i class="ti ti-menu-2" aria-hidden="true"></i>' +
+      '</button>' +
+    '</div>' +
+    '<div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>';
+
+  var menu   = document.getElementById('mobile-menu');
+  var btn    = document.getElementById('hamburger-btn');
+  var overlay = document.getElementById('nav-overlay');
+
+  function openMenu() {
+    menu.classList.add('active');
+    overlay.classList.add('active');
+    overlay.removeAttribute('aria-hidden');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Cerrar menú');
+    btn.innerHTML = '<i class="ti ti-x" aria-hidden="true"></i>';
+    // Trap focus: focus first nav link
+    var firstLink = menu.querySelector('a');
+    if (firstLink) firstLink.focus();
+  }
+
+  function closeMenu() {
+    menu.classList.remove('active');
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Abrir menú');
+    btn.innerHTML = '<i class="ti ti-menu-2" aria-hidden="true"></i>';
+    btn.focus();
+  }
+
+  btn.addEventListener('click', function() {
+    menu.classList.contains('active') ? closeMenu() : openMenu();
+  });
+  overlay.addEventListener('click', closeMenu);
+
+  // Close menu on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
+  });
+}
+
+// ── FOOTER ───────────────────────────────────────────
+function buildFooter() {
+  var footer = document.getElementById('main-footer');
+  if (!footer) return;
+
+  var year = new Date().getFullYear();
+
+  footer.innerHTML =
+    '<footer class="footer">' +
+      '<div class="footer-inner">' +
+        '<div>' +
+          '<p><strong>' + CFG.name + '</strong><br>' + CFG.doctor + '<br>' + CFG.tagline + '</p>' +
+        '</div>' +
+        '<div>' +
+          '<p>' + CFG.address.street + '<br>' + CFG.address.city + ', ' + CFG.address.country + '</p>' +
+          '<p>' + CFG.hours.display + '</p>' +
+        '</div>' +
+        '<div>' +
+          '<p><a href="https://wa.me/' + CFG.phone + '" rel="noopener">' + CFG.phoneDisplay + '</a></p>' +
+          '<p><a href="mailto:' + CFG.email + '">' + CFG.email + '</a></p>' +
+          '<p>' +
+            '<a href="' + CFG.social.instagram + '" rel="noopener noreferrer" target="_blank" aria-label="Instagram de ' + CFG.name + '"><i class="ti ti-brand-instagram" aria-hidden="true"></i></a> ' +
+            '<a href="' + CFG.social.facebook  + '" rel="noopener noreferrer" target="_blank" aria-label="Facebook de ' + CFG.name + '"><i class="ti ti-brand-facebook" aria-hidden="true"></i></a>' +
+          '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="footer-copy">' +
+        '<p>© ' + year + ' ' + CFG.name + '. Todos los derechos reservados. ' +
+          '<a href="privacidad.html">Política de privacidad</a>' +
+        '</p>' +
+      '</div>' +
+    '</footer>';
+}
+
+// ── WHATSAPP FLOAT ───────────────────────────────────
+function buildWhatsAppFloat() {
+  var el = document.getElementById('wa-float');
+  if (!el) return;
+  el.innerHTML =
+    '<a href="https://wa.me/' + CFG.phone + '" target="_blank" rel="noopener noreferrer" ' +
+       'aria-label="Chatea con nosotros por WhatsApp">' +
+      '<i class="ti ti-brand-whatsapp" aria-hidden="true"></i>' +
+    '</a>';
+}
+
+// ── LEAD-CAPTURE BANNER ──────────────────────────────
+function initPopup() {
+  var STORAGE_KEY = 'dl_popup_dismissed';
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  var banner = document.createElement('div');
+  banner.className = 'email-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-modal', 'true');
+  banner.setAttribute('aria-labelledby', 'banner-title');
+  banner.innerHTML =
+    '<div class="email-banner__content">' +
+      '<button class="email-banner__close" id="banner-close" aria-label="Cerrar guía gratuita">&times;</button>' +
+      '<h3 id="banner-title">Guía gratuita: Todo sobre el láser dental</h3>' +
+      '<p>Descarga el PDF que la ' + CFG.doctor + ' preparó para ti.</p>' +
+      '<form id="banner-form" class="email-banner__form" novalidate>' +
+        '<label for="banner-email" class="visually-hidden">Tu correo electrónico</label>' +
+        '<input type="email" id="banner-email" placeholder="tu@correo.com" required autocomplete="email">' +
+        '<button type="submit" class="btn btn--primary">Recibir guía</button>' +
+      '</form>' +
+      '<p class="email-banner__note">Sin spam. Solo para enviarte la guía.</p>' +
+    '</div>';
+
+  document.body.appendChild(banner);
+
+  function showBanner() {
+    banner.classList.add('visible');
+    document.getElementById('banner-email').focus();
+  }
+
+  function dismissBanner() {
+    banner.classList.remove('visible');
+    sessionStorage.setItem(STORAGE_KEY, '1');
+  }
+
+  var shown = false;
+  function maybeShow() {
+    if (shown) return;
+    shown = true;
+    showBanner();
+  }
+
+  var timer = setTimeout(maybeShow, 35000);
+
+  // Intersection Observer replaces scroll listener for 60% threshold
+  var sentinel = document.createElement('div');
+  sentinel.style.cssText = 'position:absolute;bottom:40%;left:0;height:1px;width:1px;pointer-events:none';
+  document.body.appendChild(sentinel);
+
+  var io = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      clearTimeout(timer);
+      io.disconnect();
+      maybeShow();
+    }
+  }, { threshold: 0 });
+  io.observe(sentinel);
+
+  document.getElementById('banner-close').addEventListener('click', dismissBanner);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && banner.classList.contains('visible')) dismissBanner();
   });
 
-  /* ---- NAV ---- */
-  function buildNav() {
-    var navEl = document.getElementById('main-nav');
-    if (!navEl) return;
-    var currentPage = location.pathname.split('/').pop() || 'index.html';
+  document.getElementById('banner-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var emailInput = document.getElementById('banner-email');
+    var email = emailInput.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailInput.setAttribute('aria-invalid', 'true');
+      emailInput.focus();
+      return;
+    }
+    emailInput.removeAttribute('aria-invalid');
+    var waMsg = encodeURIComponent('Hola, me interesa recibir la guía gratuita sobre láser dental. Mi correo: ' + email);
+    window.open('https://wa.me/' + CFG.phone + '?text=' + waMsg, '_blank', 'noopener,noreferrer');
+    dismissBanner();
+  });
+}
 
-    navEl.innerHTML =
-      '<div class="nav__inner">' +
-        '<a href="index.html" class="nav__logo" aria-label="Inicio — DoctorLáser">' +
-          '<span class="nav__logo-main">Doctor<span>Láser</span></span>' +
-          '<span class="nav__logo-sub">Dra. Ana Vinasco · Bogotá</span>' +
-        '</a>' +
-        '<nav class="nav__links" aria-label="Navegación principal">' +
-          navLinks.map(function(l) {
-            return '<a href="' + l.href + '" class="nav__link' + (currentPage === l.href ? ' active' : '') + '">' + l.label + '</a>';
-          }).join('') +
-          '<a href="agenda.html" class="nav__cta">Agendar cita</a>' +
-        '</nav>' +
-        '<button class="nav__burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-mobile">' +
-          '<span></span><span></span><span></span>' +
-        '</button>' +
-      '</div>' +
-      '<div class="nav__mobile" id="nav-mobile" role="dialog" aria-label="Menú móvil" aria-modal="true">' +
-        navLinks.map(function(l) {
-          return '<a href="' + l.href + '" class="nav__link' + (currentPage === l.href ? ' active' : '') + '">' + l.label + '</a>';
-        }).join('') +
-        '<a href="agenda.html" class="nav__cta">Agendar cita &rarr;</a>' +
-      '</div>';
+// ── FADE-UP ANIMATIONS (IntersectionObserver) ────────
+// Already used IntersectionObserver in original — kept,
+// with threshold tuned for mobile viewports.
+function initAnimations() {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    // Make all elements visible immediately
+    document.querySelectorAll('.fade-up').forEach(function(el) {
+      el.classList.add('visible');
+    });
+    return;
   }
 
-  /* ---- WHATSAPP FLOAT ---- */
-  function buildWaFloat() {
-    var waContainer = document.getElementById('wa-float');
-    if (!waContainer) return;
-    var msg = encodeURIComponent('Hola, quiero información sobre tratamientos con láser dental 😊');
-    waContainer.innerHTML =
-      '<span class="wa-float__bubble" aria-hidden="true">Escríbenos ahora</span>' +
-      '<a href="' + WA_BASE + '?text=' + msg + '" target="_blank" rel="noopener noreferrer" ' +
-         'class="wa-float__btn" id="wa-float-btn" aria-label="Contactar por WhatsApp">' +
-        '<i class="ti ti-brand-whatsapp" aria-hidden="true"></i>' +
-      '</a>';
-  }
-
-  /* ---- FOOTER ---- */
-  function buildFooter() {
-    var footerEl = document.getElementById('main-footer');
-    if (!footerEl) return;
-
-    var hoursHtml = HOURS.map(function(h) {
-      return '<div class="footer-hour-row' + (h.closed ? ' footer-hour-row--closed' : '') + '">' +
-        '<span>' + h.day + '</span><span>' + h.time + '</span>' +
-      '</div>';
-    }).join('');
-
-    footerEl.innerHTML =
-      '<footer class="footer" role="contentinfo">' +
-        '<div class="container">' +
-          '<div class="footer__inner">' +
-            '<div>' +
-              '<div class="footer__logo">Doctor<span>Láser</span></div>' +
-              '<p class="footer__tagline">Odontología con láser diodo en Bogotá. Tratamientos más precisos, menos dolor, recuperación más rápida.</p>' +
-              '<div style="margin-top:1.5rem;display:flex;gap:.75rem">' +
-                '<a href="agenda.html" class="btn btn--teal btn--sm">Agendar cita</a>' +
-              '</div>' +
-            '</div>' +
-            '<div>' +
-              '<p class="footer__heading">Páginas</p>' +
-              '<nav class="footer__links" aria-label="Navegación del pie de página">' +
-                navLinks.map(function(l) {
-                  return '<a href="' + l.href + '" class="footer__link">' + l.label + '</a>';
-                }).join('') +
-                '<a href="agenda.html" class="footer__link">Agenda</a>' +
-              '</nav>' +
-            '</div>' +
-            '<div>' +
-              '<p class="footer__heading">Contacto</p>' +
-              '<address class="footer__links" style="font-style:normal">' +
-                '<span class="footer__link">' + SITE_ADDR + '</span>' +
-                '<a href="tel:+573015666729" class="footer__link">' + SITE_PHONE + '</a>' +
-                '<a href="mailto:' + SITE_EMAIL + '" class="footer__link">' + SITE_EMAIL + '</a>' +
-              '</address>' +
-              '<p class="footer__heading" style="margin-top:1.5rem">Horarios</p>' +
-              '<div style="font-size:12px;color:rgba(255,255,255,.4)">' +
-                hoursHtml +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="footer__bottom">' +
-            '<p class="footer__copy">&copy; 2025 DoctorLáser &middot; Dra. Ana Vinasco. Todos los derechos reservados.</p>' +
-            '<p class="footer__copy">Bogotá, Colombia</p>' +
-          '</div>' +
-        '</div>' +
-      '</footer>' +
-      '<style>' +
-      '.footer-hour-row{display:flex;justify-content:space-between;padding:3px 0;gap:1rem}' +
-      '.footer-hour-row--closed span:last-child{opacity:.4}' +
-      '</style>';
-  }
-
-  /* ---- EMAIL POPUP (scroll 60% or 35 seconds) ---- */
-  function initPopup() {
-    var STORAGE_KEY = 'dl_popup_dismissed';
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
-
-    var overlay = document.createElement('div');
-    overlay.className = 'popup-overlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-labelledby', 'popup-title');
-    overlay.innerHTML =
-      '<div class="popup-card">' +
-        '<button class="popup-close" id="popup-close" aria-label="Cerrar">' +
-          '<i class="ti ti-x" aria-hidden="true"></i>' +
-        '</button>' +
-        '<div class="popup-header">' +
-          '<div class="popup-icon"><i class="ti ti-file-description" aria-hidden="true"></i></div>' +
-          '<h2 class="popup-title" id="popup-title">Guía gratuita:<br><em>Todo sobre el láser dental</em></h2>' +
-          '<p class="popup-sub">Descarga el PDF que la Dra. Ana Vinasco preparó para que llegues informado a tu primera consulta.</p>' +
-        '</div>' +
-        '<div class="popup-body">' +
-          '<input type="email" class="popup-input" id="popup-email" placeholder="Tu correo electrónico" autocomplete="email" inputmode="email">' +
-          '<button class="popup-submit" id="popup-submit">' +
-            '<i class="ti ti-download" aria-hidden="true"></i>' +
-            'Recibir guía gratis' +
-          '</button>' +
-          '<p class="popup-note"><i class="ti ti-shield-lock" style="vertical-align:-2px;margin-right:3px" aria-hidden="true"></i>Sin spam. Tu correo es solo para enviarte la guía.</p>' +
-          '<span class="popup-skip" id="popup-skip" role="button" tabindex="0">No me interesa por ahora</span>' +
-        '</div>' +
-      '</div>';
-
-    document.body.appendChild(overlay);
-
-    function showPopup() {
-      overlay.classList.add('visible');
-      var emailInput = document.getElementById('popup-email');
-      if (emailInput) emailInput.focus();
-    }
-
-    function dismissPopup() {
-      overlay.classList.remove('visible');
-      sessionStorage.setItem(STORAGE_KEY, '1');
-    }
-
-    var shown = false;
-    function maybeShow() {
-      if (shown) return;
-      shown = true;
-      showPopup();
-    }
-
-    var timer = setTimeout(maybeShow, 35000);
-
-    var scrollHandler = function () {
-      var scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-      if (scrolled >= 0.6) {
-        clearTimeout(timer);
-        window.removeEventListener('scroll', scrollHandler, { passive: true });
-        maybeShow();
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // stop observing once revealed
       }
-    };
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-
-    document.getElementById('popup-close').addEventListener('click', dismissPopup);
-    document.getElementById('popup-skip').addEventListener('click', dismissPopup);
-    document.getElementById('popup-skip').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') dismissPopup();
     });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) dismissPopup();
-    });
+  document.querySelectorAll('.fade-up').forEach(function(el) {
+    observer.observe(el);
+  });
+}
 
-    document.getElementById('popup-submit').addEventListener('click', function () {
-      var email = document.getElementById('popup-email').value.trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        document.getElementById('popup-email').focus();
-        return;
-      }
-      var waMsg = encodeURIComponent('Hola, me interesa recibir la guía gratuita sobre láser dental. Mi correo: ' + email);
-      window.open('https://wa.me/' + WA_NUMBER + '?text=' + waMsg, '_blank');
-      dismissPopup();
-    });
-
-    overlay.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') dismissPopup();
+// ── SERVICE WORKER REGISTRATION ──────────────────────
+function registerSW() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function(err) {
+        // SW registration failed — non-critical, fail silently
+        console.warn('SW registration failed:', err);
+      });
     });
   }
+}
 
-})();
+// ── INIT ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  injectFonts();
+  injectSchema();
+  buildNav();
+  buildFooter();
+  buildWhatsAppFloat();
+  initPopup();
+  initAnimations();
+  registerSW();
+});
